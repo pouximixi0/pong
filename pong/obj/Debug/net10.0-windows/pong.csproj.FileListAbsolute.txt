@@ -1,0 +1,17 @@
+C:\Users\j.masson\source\repos\pong\pong\bin\Debug\net10.0-windows\pong.exe
+C:\Users\j.masson\source\repos\pong\pong\bin\Debug\net10.0-windows\pong.deps.json
+C:\Users\j.masson\source\repos\pong\pong\bin\Debug\net10.0-windows\pong.runtimeconfig.json
+C:\Users\j.masson\source\repos\pong\pong\bin\Debug\net10.0-windows\pong.dll
+C:\Users\j.masson\source\repos\pong\pong\bin\Debug\net10.0-windows\pong.pdb
+C:\Users\j.masson\source\repos\pong\pong\obj\Debug\net10.0-windows\pong.Form1.resources
+C:\Users\j.masson\source\repos\pong\pong\obj\Debug\net10.0-windows\pong.csproj.GenerateResource.cache
+C:\Users\j.masson\source\repos\pong\pong\obj\Debug\net10.0-windows\pong.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\j.masson\source\repos\pong\pong\obj\Debug\net10.0-windows\pong.AssemblyInfoInputs.cache
+C:\Users\j.masson\source\repos\pong\pong\obj\Debug\net10.0-windows\pong.AssemblyInfo.cs
+C:\Users\j.masson\source\repos\pong\pong\obj\Debug\net10.0-windows\pong.csproj.CoreCompileInputs.cache
+C:\Users\j.masson\source\repos\pong\pong\obj\Debug\net10.0-windows\pong.dll
+C:\Users\j.masson\source\repos\pong\pong\obj\Debug\net10.0-windows\refint\pong.dll
+C:\Users\j.masson\source\repos\pong\pong\obj\Debug\net10.0-windows\pong.pdb
+C:\Users\j.masson\source\repos\pong\pong\obj\Debug\net10.0-windows\pong.genruntimeconfig.cache
+C:\Users\j.masson\source\repos\pong\pong\obj\Debug\net10.0-windows\ref\pong.dll
+C:\Users\j.masson\source\repos\pong\pong\obj\Debug\net10.0-windows\pong.csproj.Up2Date

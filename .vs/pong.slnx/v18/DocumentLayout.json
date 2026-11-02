@@ -1,0 +1,70 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\j.masson\\source\\repos\\pong\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D4587926-06FA-4352-82EC-F0977F1F20FB}|pong\\pong.csproj|c:\\users\\j.masson\\source\\repos\\pong\\pong\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4587926-06FA-4352-82EC-F0977F1F20FB}|pong\\pong.csproj|solutionrelative:pong\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4587926-06FA-4352-82EC-F0977F1F20FB}|pong\\pong.csproj|c:\\users\\j.masson\\source\\repos\\pong\\pong\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D4587926-06FA-4352-82EC-F0977F1F20FB}|pong\\pong.csproj|solutionrelative:pong\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4587926-06FA-4352-82EC-F0977F1F20FB}|pong\\pong.csproj|c:\\users\\j.masson\\source\\repos\\pong\\pong\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4587926-06FA-4352-82EC-F0977F1F20FB}|pong\\pong.csproj|solutionrelative:pong\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [Conception]",
+              "DocumentMoniker": "C:\\Users\\j.masson\\source\\repos\\pong\\pong\\Form1.cs",
+              "RelativeDocumentMoniker": "pong\\Form1.cs",
+              "ToolTip": "C:\\Users\\j.masson\\source\\repos\\pong\\pong\\Form1.cs [Conception]",
+              "RelativeToolTip": "pong\\Form1.cs [Conception]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T14:57:23.853Z",
+              "EditorCaption": " [Conception]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\j.masson\\source\\repos\\pong\\pong\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "pong\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\j.masson\\source\\repos\\pong\\pong\\Form1.Designer.cs",
+              "RelativeToolTip": "pong\\Form1.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T14:56:36.424Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\j.masson\\source\\repos\\pong\\pong\\Form1.cs",
+              "RelativeDocumentMoniker": "pong\\Form1.cs",
+              "ToolTip": "C:\\Users\\j.masson\\source\\repos\\pong\\pong\\Form1.cs",
+              "RelativeToolTip": "pong\\Form1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBEAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T14:52:58.895Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
