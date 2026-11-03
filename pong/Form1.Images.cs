@@ -15,5 +15,7 @@ namespace pong
         private Image imgMenuPlayRect = Image.FromFile(dossierImages + @"boutons\bouton_cyan_repos.png");
         private Image imgMenuPlayUpRect = Image.FromFile(dossierImages + @"boutons\bouton_cyan_survol.png");
         private Image imgLogo = Image.FromFile(dossierImages + @"logo\logo_pong.png");
+        private Image imgPlus = Image.FromFile(dossierImages + @"icones\icone_fleche_droite.png");
+        private Image imgMoin = Image.FromFile(dossierImages + @"icones\icone_fleche_gauche.png");
     }
 }

@@ -1,3 +1,4 @@
+using System.Text.Json;
 namespace pong
 {
     public partial class Form1 : Form
@@ -17,10 +18,17 @@ namespace pong
         int impactCaseCyan = -1;
         int impactCaseRose = -1;
 
-        bool gameStart = false;
+        enum Ecran { Menu, Parametres, Jeu }
+        Ecran ecran = Ecran.Menu;
+
         int impactX, impactY;
 
         Random hasard = new Random();
+
+        int vitesseDepart = 5;
+        int scoreMax = 5;
+        bool afficherDebug = true;
+
 
         public Form1()
         {
@@ -43,6 +51,16 @@ namespace pong
 
             sensH = -1;
             sensV = -1;
+
+            var data = loadJson();
+
+            if (data != null)
+            {
+                vitesseDepart = data["VitesseDepart"].GetInt32();
+
+            }
+            scoreMax = 5;
+            afficherDebug = true;
 
         }
     }
