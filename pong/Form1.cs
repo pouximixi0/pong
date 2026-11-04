@@ -57,10 +57,11 @@ namespace pong
             if (data != null)
             {
                 vitesseDepart = data["VitesseDepart"].GetInt32();
+                afficherDebug = data["AfficherDebug"].GetBoolean();
 
             }
             scoreMax = 5;
-            afficherDebug = true;
+            
 
         }
     }

@@ -8,23 +8,28 @@
     "net10.0-windows": []
   },
   "packageFolders": {
-    "C:\\Users\\PC\\.nuget\\packages\\": {}
+    "C:\\Users\\j.masson\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\Downloads\\pong\\pong\\pong.csproj",
+      "projectUniqueName": "C:\\Users\\j.masson\\Documents\\DEV\\pong\\pong\\pong.csproj",
       "projectName": "pong",
-      "projectPath": "C:\\Users\\PC\\Downloads\\pong\\pong\\pong.csproj",
-      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\Downloads\\pong\\pong\\obj\\",
+      "projectPath": "C:\\Users\\j.masson\\Documents\\DEV\\pong\\pong\\pong.csproj",
+      "packagesPath": "C:\\Users\\j.masson\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\j.masson\\Documents\\DEV\\pong\\pong\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\j.masson\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net10.0-windows"
       ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
       "frameworks": {
         "net10.0-windows": {
           "framework": "net10.0-windows7.0",
@@ -67,7 +72,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.403/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

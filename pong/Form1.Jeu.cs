@@ -68,6 +68,8 @@ namespace pong
             if (toucheS && RJ1[1] + RJ1[3] < this.ClientSize.Height) RJ1[1] += Convert.ToInt32(VR);
             if (toucheHaut && RJ2[1] > 0) RJ2[1] -= Convert.ToInt32(VR);
             if (toucheBas && RJ2[1] + RJ2[3] < this.ClientSize.Height) RJ2[1] += Convert.ToInt32(VR);
+            
+            if (toucheEsc) ecran = Ecran.Menu;
 
             Invalidate();
         }
@@ -105,6 +107,10 @@ namespace pong
                 g.DrawString("Vballe : " + VBalle.ToString() + "VR : " + VR.ToString(), policeScore, Brushes.White, 10, 150);
                 g.DrawString("impact : " + impactCaseCyan.ToString(), policeScore, Brushes.White, 10, 170);
             }
+
+            g.DrawImage(Image.FromFile(dossierImages + @"chiffres\chiffre_cyan_" + SJ1 + ".png"), 555, 50, 60, 100);
+            g.DrawImage(Image.FromFile(dossierImages + @"chiffres\chiffre_rose_" + SJ2 + ".png"), 645, 50, 60, 100);
+
         }
 
         private void drawBalle(Graphics g, int[] o)
