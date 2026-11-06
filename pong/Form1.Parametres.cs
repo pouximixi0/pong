@@ -17,7 +17,7 @@ namespace pong
       PrivateFontCollection customFont = new PrivateFontCollection();
       customFont.AddFontFile("font/SpaceGrotesk-VariableFont_wght.ttf");
       FontFamily ff = customFont.Families[0];
-      Font customPolice = new Font(ff, 20, FontStyle.Bold); 
+      Font customPolice = new Font(ff, 20, FontStyle.Bold);
       StringFormat centre = new StringFormat();
       centre.Alignment = StringAlignment.Center;
       centre.LineAlignment = StringAlignment.Center;
@@ -30,7 +30,7 @@ namespace pong
       rectVitMoins = new Rectangle(milieu - 250, 220, tailleBouton, tailleBouton);
       rectVitPlus = new Rectangle(milieu + 190, 220, tailleBouton, tailleBouton);
       Rectangle rectTexteVitesse = new Rectangle(milieu - 190, 220, 380, tailleBouton);
-      rectDebug = new Rectangle(milieu - 250/2, 280, 250, 80);
+      rectDebug = new Rectangle(milieu - 250 / 2, 280, 250, 80);
 
       g.DrawImage(imgMoin, rectVitMoins);
       g.DrawImage(imgPlus, rectVitPlus);
@@ -44,7 +44,7 @@ namespace pong
       g.DrawString("Quitter & sauv", customPolice, Brushes.White, rectRetour, centre);
     }
 
-        private void ClicParametres(Point souris)
+    private void ClicParametres(Point souris)
     {
       if (rectVitMoins.Contains(souris) && vitesseDepart > 1)
       {
@@ -75,16 +75,16 @@ namespace pong
       }
     }
     private void SurvolParametres(Point souris)
-        {
-            bool survolDebug = rectDebug.Contains(souris);
-            bool survolRetour = rectRetour.Contains(souris);
+    {
+      bool survolDebug = rectDebug.Contains(souris);
+      bool survolRetour = rectRetour.Contains(souris);
 
-            if (survolDebug != rectDebugBoutonStatus || survolRetour != rectRetourBoutonStatus)
-            {
-                rectDebugBoutonStatus = survolDebug;
-                rectRetourBoutonStatus = survolRetour;
-                Invalidate();
-            }
-        }
+      if (survolDebug != rectDebugBoutonStatus || survolRetour != rectRetourBoutonStatus)
+      {
+        rectDebugBoutonStatus = survolDebug;
+        rectRetourBoutonStatus = survolRetour;
+        Invalidate();
+      }
+    }
   }
 }

@@ -36,12 +36,14 @@ namespace pong
       }
       else if (rectMultiServeurButton.Contains(souris))
       {
-        ecran = Ecran.Menu;
+        ecran = Ecran.JeuServeur;
+        DemarrerServeur();
         Invalidate();
       }
       else if (rectMultiClientButton.Contains(souris))
       {
-        ecran = Ecran.Menu;
+        ecran = Ecran.JeuClient;
+        DemarrerClient();
         Invalidate();
       }
     }

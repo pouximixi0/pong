@@ -1,4 +1,8 @@
 using System.Text.Json;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+
 namespace pong
 {
     public partial class Form1 : Form
@@ -18,7 +22,7 @@ namespace pong
         int impactCaseCyan = -1;
         int impactCaseRose = -1;
 
-        enum Ecran { Menu, Parametres, Jeu, GameMode, FinJeux }
+        enum Ecran { Menu, Parametres, Jeu, JeuServeur, JeuClient, GameMode, FinJeux }
         Ecran ecran = Ecran.Menu;
 
         int impactX, impactY;
@@ -28,6 +32,10 @@ namespace pong
         int vitesseDepart = 5;
         int scoreMax = 5;
         bool afficherDebug = true;
+
+        UdpClient? udp;
+        const int PORT = 8080;
+        IPEndPoint? clientDistant;
 
 
         public Form1()
@@ -58,11 +66,53 @@ namespace pong
             {
                 vitesseDepart = data["VitesseDepart"].GetInt32();
                 afficherDebug = data["AfficherDebug"].GetBoolean();
+                
 
             }
             scoreMax = 5;
-
-
         }
+
+
+        void DemarrerServeur()
+        {
+            if (udp == null) udp = new UdpClient(PORT);
+
+            ecran = Ecran.JeuServeur;
+            this.Text = "Serveur en attente...";
+            Console.WriteLine("Serveur en attente sur le port " + PORT);
+        }
+
+        void DemarrerClient()
+        {
+            if (udp == null)
+            {
+                udp = new UdpClient();
+                udp.Connect("127.0.0.1", PORT);
+            }
+
+            ecran = Ecran.JeuClient;
+            this.Text = "Client connecté";
+        }
+
+        void EnvoyerMessage(Dictionary<string, string> message)
+        {
+            if (udp == null) return;
+
+            string json = JsonSerializer.Serialize(message);
+            byte[] data = Encoding.UTF8.GetBytes(json);
+
+            if (ecran == Ecran.JeuClient)
+            {
+                udp.Send(data, data.Length);
+            }
+            else if (clientDistant != null)
+            {
+                udp.Send(data, data.Length, clientDistant);
+            }
+
+            //Console.WriteLine("Envoyé : " + json);
+        }
+
     }
+
 }
