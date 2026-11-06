@@ -110,6 +110,28 @@ namespace pong
 
             g.DrawImage(Image.FromFile(dossierImages + @"chiffres\chiffre_cyan_" + SJ1 + ".png"), 555, 50, 60, 100);
             g.DrawImage(Image.FromFile(dossierImages + @"chiffres\chiffre_rose_" + SJ2 + ".png"), 645, 50, 60, 100);
+            if (SJ1 > 4)
+            {
+                rectPlayBouton = new Rectangle((ClientSize.Width - 270) / 2, (ClientSize.Height - 80) / 2, 270, 80);
+                g.DrawString("Le joueur 1 a gagner !", customPolice, Brushes.White, rectPlayBouton, centre);
+
+                Invalidate();
+                Thread.Sleep(5000);
+
+                SJ1 = 0;
+                resetGame(SJ1);
+            }
+            else if (SJ2 > 4)
+            {
+                rectPlayBouton = new Rectangle((ClientSize.Width - 270) / 2, (ClientSize.Height - 80) / 2, 270, 80);
+                g.DrawString("Le joueur 2 a gagner !", customPolice, Brushes.White, rectPlayBouton, centre);
+
+                Invalidate();
+                Thread.Sleep(5000);
+
+                SJ2 = 0;
+                resetGame(SJ2);
+            }
 
         }
 
