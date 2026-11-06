@@ -5,7 +5,7 @@ namespace pong
 {
     public partial class Form1
     {
-        private Font police = new Font("Calibri", 20, FontStyle.Bold);        
+        private Font police = new Font("Calibri", 20, FontStyle.Bold);
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -18,11 +18,14 @@ namespace pong
                 case Ecran.Menu:
                     DessinerMenu(g);
                     break;
-                case Ecran.Parametres:
-                    DessinerParametres(g);
-                    break;
                 case Ecran.Jeu:
                     DessinerJeu(g);
+                    break;
+                case Ecran.GameMode:
+                    DessinerGameMode(g);
+                    break;
+                case Ecran.Parametres:
+                    DessinerParametres(g);
                     break;
             }
         }

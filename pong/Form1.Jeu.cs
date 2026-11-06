@@ -68,7 +68,7 @@ namespace pong
             if (toucheS && RJ1[1] + RJ1[3] < this.ClientSize.Height) RJ1[1] += Convert.ToInt32(VR);
             if (toucheHaut && RJ2[1] > 0) RJ2[1] -= Convert.ToInt32(VR);
             if (toucheBas && RJ2[1] + RJ2[3] < this.ClientSize.Height) RJ2[1] += Convert.ToInt32(VR);
-            
+
             if (toucheEsc) ecran = Ecran.Menu;
 
             Invalidate();

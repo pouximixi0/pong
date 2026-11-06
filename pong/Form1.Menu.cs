@@ -8,6 +8,8 @@ namespace pong
         private bool rectPlayBoutonStatus = false;
         private bool rectSettingBoutonStatus = false;
         private bool rectQuitBoutonStatus = false;
+        private Font customPolice;
+        private StringFormat centre;
 
         private void DessinerMenu(Graphics g)
         {
@@ -25,9 +27,9 @@ namespace pong
             PrivateFontCollection customFont = new PrivateFontCollection();
             customFont.AddFontFile("font/SpaceGrotesk-VariableFont_wght.ttf");
             FontFamily ff = customFont.Families[0];
-            StringFormat centre = new StringFormat();
-            
-            Font customPolice = new Font(ff, 20, FontStyle.Bold);   
+            centre = new StringFormat();
+
+            customPolice = new Font(ff, 20, FontStyle.Bold);
 
             centre.Alignment = StringAlignment.Center;
             centre.LineAlignment = StringAlignment.Center;
@@ -41,7 +43,7 @@ namespace pong
         {
             if (rectPlayBouton.Contains(souris))
             {
-                ecran = Ecran.Jeu;
+                ecran = Ecran.GameMode;
                 VBalle = vitesseDepart;
                 gameTimer.Start();
                 Invalidate();

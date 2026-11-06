@@ -12,6 +12,9 @@ namespace pong
                 case Ecran.Parametres:
                     ClicParametres(e.Location);
                     break;
+                case Ecran.GameMode:
+                    ClicMode(e.Location);
+                    break;
             }
         }
 
@@ -24,6 +27,9 @@ namespace pong
                     break;
                 case Ecran.Parametres:
                     SurvolParametres(e.Location);
+                    break;
+                case Ecran.GameMode:
+                    SurvolMode(e.Location);
                     break;
             }
         }
