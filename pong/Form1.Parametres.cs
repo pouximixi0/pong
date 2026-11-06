@@ -11,7 +11,6 @@ namespace pong
 
     private bool rectDebugBoutonStatus = false;
     private bool rectRetourBoutonStatus = false;
-
     private void DessinerParametres(Graphics g)
     {
       PrivateFontCollection customFont = new PrivateFontCollection();
@@ -38,6 +37,17 @@ namespace pong
 
       g.DrawImage(rectDebugBoutonStatus ? imgMenuPlayUpRect : imgMenuPlayRect, rectDebug);
       g.DrawString("Debug : " + Convert.ToString(afficherDebug), customPolice, Brushes.White, rectDebug, centre);
+
+      Rectangle rectTextePseudo = new Rectangle(milieu - 250, 380, 500, 50);
+      string curseur = "";
+
+      if (DateTime.Now.Millisecond < 500)
+      {
+        curseur = "_";
+      }
+
+      g.DrawString("Pseudo : " + pseudo + curseur, customPolice, Brushes.White, rectTextePseudo, centre);
+
 
       rectRetour = new Rectangle(milieu - 125, ClientSize.Height - 150, 250, 80);
       g.DrawImage(rectRetourBoutonStatus ? imgMenuPlayUpRect : imgMenuPlayRect, rectRetour);
@@ -67,7 +77,8 @@ namespace pong
         {
           { "VitesseDepart", vitesseDepart },
           { "ScoreMax", scoreMax },
-          { "AfficherDebug", afficherDebug }
+          { "AfficherDebug", afficherDebug },
+          { "Pseudo", pseudo }
         });
 
         ecran = Ecran.Menu;
@@ -85,6 +96,21 @@ namespace pong
         rectRetourBoutonStatus = survolRetour;
         Invalidate();
       }
+    }
+    private void SaisirPseudo(object sender, KeyPressEventArgs e)
+    {
+      if (ecran != Ecran.Parametres) return;
+
+      if (e.KeyChar == '\b' && pseudo.Length > 0)
+      {
+        pseudo = pseudo.Remove(pseudo.Length - 1);
+      }
+      else if (char.IsLetterOrDigit(e.KeyChar) && pseudo.Length < 12)
+      {
+        pseudo = pseudo + e.KeyChar;
+      }
+
+      Invalidate();
     }
   }
 }

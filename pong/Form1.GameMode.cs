@@ -2,34 +2,43 @@ namespace pong
 {
   public partial class Form1
   {
-    private Rectangle rectSoloButton, rectMultiServeurButton, rectMultiClientButton;
+    private Rectangle rectSoloButton, rectMultiServeurButton, rectMultiClientButton, rectDuoButton;
     private bool rectSoloButtonStatus = false;
     private bool rectMultiServeurButtonStatus = false;
     private bool rectMultiClientButtonStatus = false;
+    private bool rectDuoButtonStatus = false;
     private void DessinerGameMode(Graphics g)
     {
 
       int largeur = 270;
       int hauteur = 80;
       rectSoloButton = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2, largeur, hauteur);
-      rectMultiServeurButton = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2 + 70, largeur, hauteur);
-      rectMultiClientButton = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2 + 140, largeur, hauteur);
+      rectDuoButton = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2 + 70, largeur, hauteur);
+      rectMultiServeurButton = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2 + 140, largeur, hauteur);
+      rectMultiClientButton = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2 + 210, largeur, hauteur);
 
 
       g.DrawImage(imgLogo, rectLogo);
       g.DrawImage(rectSoloButtonStatus ? imgMenuPlayUpRect : imgMenuPlayRect, rectSoloButton);
+      g.DrawImage(rectDuoButtonStatus ? imgMenuPlayUpRect : imgMenuPlayRect, rectDuoButton);
       g.DrawImage(rectMultiServeurButtonStatus ? imgMenuPlayUpRect : imgMenuPlayRect, rectMultiServeurButton);
       g.DrawImage(rectMultiClientButtonStatus ? imgMenuPlayUpRect : imgMenuPlayRect, rectMultiClientButton);
 
       g.DrawString("Solo", customPolice, Brushes.White, rectPlayBouton, centre);
-      g.DrawString("Multi (host)", customPolice, Brushes.White, rectSettingBouton, centre);
-      g.DrawString("Multi (client)", customPolice, Brushes.White, rectQuitButton, centre);
+      g.DrawString("Duo local", customPolice, Brushes.White, rectDuoButton, centre);
+      g.DrawString("Multi (host)", customPolice, Brushes.White, rectMultiServeurButton, centre);
+      g.DrawString("Multi (client)", customPolice, Brushes.White, rectMultiClientButton, centre);
 
     }
 
     private void ClicMode(Point souris)
     {
       if (rectSoloButton.Contains(souris))
+      {
+        ecran = Ecran.JeuSolo;
+        Invalidate();
+      }
+      else if (rectDuoButton.Contains(souris))
       {
         ecran = Ecran.Jeu;
         Invalidate();
@@ -51,13 +60,18 @@ namespace pong
     private void SurvolMode(Point souris)
     {
       bool survolSolo = rectSoloButton.Contains(souris);
+      bool survolDuo = rectDuoButton.Contains(souris);
       bool survolMultiServeur = rectMultiServeurButton.Contains(souris);
       bool survolMultiClient = rectMultiClientButton.Contains(souris);
 
 
-      if (survolSolo != rectSoloButtonStatus || survolMultiServeur != rectMultiServeurButtonStatus || survolMultiClient != rectMultiClientButtonStatus)
+      if (survolSolo != rectSoloButtonStatus ||
+          survolMultiServeur != rectMultiServeurButtonStatus ||
+          survolMultiClient != rectMultiClientButtonStatus ||
+          survolDuo != rectDuoButtonStatus)
       {
         rectSoloButtonStatus = survolSolo;
+        rectDuoButtonStatus = survolDuo;
         rectMultiServeurButtonStatus = survolMultiServeur;
         rectMultiClientButtonStatus = survolMultiClient;
         Invalidate();

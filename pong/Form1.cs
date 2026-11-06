@@ -22,7 +22,7 @@ namespace pong
         int impactCaseCyan = -1;
         int impactCaseRose = -1;
 
-        enum Ecran { Menu, Parametres, Jeu, JeuServeur, JeuClient, GameMode, FinJeux }
+        enum Ecran { Menu, Parametres, Jeu, JeuSolo, JeuServeur, JeuClient, GameMode, FinJeux }
         Ecran ecran = Ecran.Menu;
 
         int impactX, impactY;
@@ -36,6 +36,7 @@ namespace pong
         UdpClient? udp;
         const int PORT = 8080;
         IPEndPoint? clientDistant;
+        private string pseudo;
 
 
         public Form1()
@@ -52,6 +53,7 @@ namespace pong
             this.KeyUp += new KeyEventHandler(keyReleased);
             this.MouseClick += new MouseEventHandler(Form1_MouseClick);
             this.MouseMove += new MouseEventHandler(Form1_MouseMove);
+            this.KeyPress += SaisirPseudo;
 
             gameTimer.Interval = 20;
             gameTimer.Tick += new EventHandler(GameLoop);
@@ -66,7 +68,8 @@ namespace pong
             {
                 vitesseDepart = data["VitesseDepart"].GetInt32();
                 afficherDebug = data["AfficherDebug"].GetBoolean();
-                
+                pseudo = data["Pseudo"].GetString();
+
 
             }
             scoreMax = 5;

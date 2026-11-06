@@ -138,7 +138,7 @@ namespace pong
                 if (message.ContainsKey("BALLEY")) Balle[1] = Convert.ToInt32(message["BALLEY"]);
                 if (message.ContainsKey("SJ1")) SJ1 = Convert.ToInt32(message["SJ1"]);
                 if (message.ContainsKey("SJ2")) SJ2 = Convert.ToInt32(message["SJ2"]);
-                Console.WriteLine(source);
+                //Console.WriteLine(source);
             }
         }
 
