@@ -178,7 +178,7 @@ namespace pong
                 Rectangle destination = new Rectangle(impactX - taille / 2, impactY - taille / 2, taille, taille);
                 g.DrawImage(imgImpactRose, destination, source, GraphicsUnit.Pixel);
             }
-            if (ecran == Ecran.JeuServeur)
+            if (ecran == Ecran.JeuServeur || ecran == Ecran.JeuClient)
             {
                 g.DrawString(pseudo, customPolice, Brushes.White, 320 - widthTxt(pseudo, g), 30);
                 g.DrawString(pseudo2, customPolice, Brushes.White, 960 - widthTxt(pseudo2, g), 30);
