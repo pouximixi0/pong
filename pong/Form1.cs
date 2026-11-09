@@ -31,6 +31,7 @@ namespace pong
 
         int vitesseDepart = 5;
         int scoreMax = 5;
+        string pseudo2;
         bool afficherDebug = true;
 
         UdpClient? udp;

@@ -21,6 +21,7 @@ namespace pong
                 case Ecran.Jeu:
                 case Ecran.JeuServeur:
                 case Ecran.JeuClient:
+                case Ecran.JeuSolo:
                     DessinerJeu(g);
                     break;
                 case Ecran.GameMode:

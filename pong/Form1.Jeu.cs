@@ -9,7 +9,7 @@ namespace pong
         private bool clientStatus;
         private void GameLoop(object sender, EventArgs e)
         {
-            if (ecran != Ecran.Jeu && ecran != Ecran.JeuServeur && ecran != Ecran.JeuClient)
+            if (ecran != Ecran.Jeu && ecran != Ecran.JeuServeur && ecran != Ecran.JeuClient && ecran != Ecran.JeuSolo)
             {
                 Invalidate();
                 return;
@@ -77,11 +77,24 @@ namespace pong
                 }
             }
 
-            
-            if (toucheZ && RJ1[1] > 0) RJ1[1] -= Convert.ToInt32(VR);
-            if (toucheS && RJ1[1] + RJ1[3] < this.ClientSize.Height) RJ1[1] += Convert.ToInt32(VR);
-            if (toucheHaut && RJ2[1] > 0) RJ2[1] -= Convert.ToInt32(VR);
-            if (toucheBas && RJ2[1] + RJ2[3] < this.ClientSize.Height) RJ2[1] += Convert.ToInt32(VR);
+
+            if (ecran == Ecran.JeuSolo)
+            {
+                if (toucheZ && RJ1[1] > 0) RJ1[1] -= Convert.ToInt32(VR);
+                if (toucheS && RJ1[1] + RJ1[3] < this.ClientSize.Height) RJ1[1] += Convert.ToInt32(VR);
+                if (RJ2[1] > Balle[1] && RJ2[1] != Balle[1] && RJ2[1] > 0) RJ2[1] -= Convert.ToInt32(VR);
+                if (RJ2[1] < Balle[1] && RJ2[1] != Balle[1] && RJ2[1] + RJ2[3] < this.ClientSize.Height) RJ2[1] += Convert.ToInt32(VR);
+                Console.WriteLine("PADX : " + RJ2[0] + "PADY : " + RJ2[1]);
+                Console.WriteLine("BALLEX : " + Balle[0] + "BALLEY : " + Balle[1]);
+
+            }
+            else
+            {
+                if (toucheZ && RJ1[1] > 0) RJ1[1] -= Convert.ToInt32(VR);
+                if (toucheS && RJ1[1] + RJ1[3] < this.ClientSize.Height) RJ1[1] += Convert.ToInt32(VR);
+                if (toucheHaut && RJ2[1] > 0) RJ2[1] -= Convert.ToInt32(VR);
+                if (toucheBas && RJ2[1] + RJ2[3] < this.ClientSize.Height) RJ2[1] += Convert.ToInt32(VR);
+            }
 
             if (toucheEsc) ecran = Ecran.Menu;
 
@@ -94,7 +107,8 @@ namespace pong
                     { "BALLEX", Balle[0].ToString()},
                     { "BALLEY", Balle[1].ToString()},
                     {"SJ1", SJ1.ToString()},
-                    {"SJ2", SJ2.ToString()}
+                    {"SJ2", SJ2.ToString()},
+                    {"name", pseudo.ToString()}
 
                 });
             }
@@ -139,6 +153,7 @@ namespace pong
                 if (message.ContainsKey("BALLEY")) Balle[1] = Convert.ToInt32(message["BALLEY"]);
                 if (message.ContainsKey("SJ1")) SJ1 = Convert.ToInt32(message["SJ1"]);
                 if (message.ContainsKey("SJ2")) SJ2 = Convert.ToInt32(message["SJ2"]);
+                if (message.ContainsKey("name")) pseudo2 = Convert.ToString(message["name"]);
                 //Console.WriteLine(source);
             }
         }
@@ -162,6 +177,12 @@ namespace pong
                 Rectangle source = new Rectangle(impactCaseRose * taille, 0, taille, taille);
                 Rectangle destination = new Rectangle(impactX - taille / 2, impactY - taille / 2, taille, taille);
                 g.DrawImage(imgImpactRose, destination, source, GraphicsUnit.Pixel);
+            }
+            if (ecran == Ecran.JeuServeur)
+            {
+                g.DrawString(pseudo, customPolice, Brushes.White, 320 - widthTxt(pseudo, g), 30);
+                g.DrawString(pseudo2, customPolice, Brushes.White, 960 - widthTxt(pseudo2, g), 30);
+                Console.WriteLine(pseudo2);
             }
             if (afficherDebug)
             {
@@ -242,6 +263,19 @@ namespace pong
             }
             impactX = Balle[0] + Balle[2] / 2;
             impactY = Balle[1] + Balle[3] / 2;
+        }
+
+        private float widthTxt(string txt, Graphics g)
+        {
+            string pseudoTxt = txt;
+            SizeF pseudoTxtSize = new SizeF(300.0F, 500.0F);
+            StringFormat newStringFormat = new StringFormat();
+            int charactersFitted;
+            int linesFilled;
+            newStringFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+            SizeF pseudoTxtSizeFinal = new SizeF();
+            pseudoTxtSizeFinal = g.MeasureString(pseudo, customPolice, pseudoTxtSize, newStringFormat, out charactersFitted, out linesFilled);
+            return pseudoTxtSizeFinal.Width;
         }
     }
 }
