@@ -77,6 +77,7 @@ namespace pong
                 }
             }
 
+            
             if (toucheZ && RJ1[1] > 0) RJ1[1] -= Convert.ToInt32(VR);
             if (toucheS && RJ1[1] + RJ1[3] < this.ClientSize.Height) RJ1[1] += Convert.ToInt32(VR);
             if (toucheHaut && RJ2[1] > 0) RJ2[1] -= Convert.ToInt32(VR);

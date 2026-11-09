@@ -90,7 +90,7 @@ namespace pong
             if (udp == null)
             {
                 udp = new UdpClient();
-                udp.Connect("127.0.0.1", PORT);
+                udp.Connect("172.17.3.5", PORT);
             }
 
             ecran = Ecran.JeuClient;

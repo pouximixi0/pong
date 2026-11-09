@@ -46,6 +46,7 @@ namespace pong
                 ecran = Ecran.GameMode;
                 VBalle = vitesseDepart;
                 gameTimer.Start();
+                clientStatus = true;
                 Invalidate();
             }
             else if (rectSettingBouton.Contains(souris))
