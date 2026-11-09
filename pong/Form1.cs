@@ -33,6 +33,13 @@ namespace pong
         int scoreMax = 5;
         string pseudo2;
         bool afficherDebug = true;
+        private bool estEnPause = false;
+        private System.Windows.Forms.Timer relanceTimer;
+        private string joueurGagnant = "";
+        private bool finDePartie = false;
+        private string messagePause = "";
+        private DateTime derniereReception = DateTime.MinValue;
+
 
         UdpClient? udp;
         const int PORT = 8080;
@@ -59,6 +66,24 @@ namespace pong
             gameTimer.Interval = 20;
             gameTimer.Tick += new EventHandler(GameLoop);
             gameTimer.Start();
+
+            relanceTimer = new System.Windows.Forms.Timer();
+            relanceTimer.Tick += (s, e) =>
+            {
+                relanceTimer.Stop();
+
+                if (finDePartie)
+                {
+                    SJ1 = 0;
+                    SJ2 = 0;
+                    finDePartie = false;
+                    resetGame(hasard.Next(0, 2) == 0 ? 1 : -1);
+                }
+
+                estEnPause = false;
+                messagePause = "";
+            };
+
 
             sensH = -1;
             sensV = -1;

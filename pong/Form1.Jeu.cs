@@ -14,89 +14,24 @@ namespace pong
                 Invalidate();
                 return;
             }
-            if (clientStatus)
+
+            if (toucheEsc)
             {
-                VBalle += 0.008;
-                VR += 0.002;
-                Balle[0] += Convert.ToInt32(VBalle) * sensH;
-                Balle[1] += Convert.ToInt32(VBalle) * sensV;
+                ecran = Ecran.Menu;
+                relanceTimer.Stop();
+                estEnPause = false;
+                messagePause = "";
+                Invalidate();
+                return;
             }
 
-            if (Balle[1] <= 0)
+            if (!estEnPause)
             {
-                sensV = 1;
+                if (ecran != Ecran.JeuClient) MettreAJourBalle();
+                DeplacerRaquettes();
             }
 
-            if (Balle[1] + Balle[3] >= this.ClientSize.Height)
-            {
-                sensV = -1;
-            }
-
-            if (Balle[0] <= 0)
-            {
-                SJ2++;
-                resetGame(-1);
-            }
-            if (Balle[0] >= this.ClientSize.Width)
-            {
-                SJ1++;
-                resetGame(1);
-            }
-
-            Rectangle rectBalle = new Rectangle(Balle[0] + 20, Balle[1] + 20, Balle[2] - 40, Balle[3] - 40);
-            Rectangle rectRJ1 = new Rectangle(RJ1[0] + 38, RJ1[1] + 25, RJ1[2] - 76, RJ1[3] - 50);
-            Rectangle rectRJ2 = new Rectangle(RJ2[0] + 38, RJ2[1] + 25, RJ2[2] - 76, RJ2[3] - 50);
-
-            if (rectBalle.IntersectsWith(rectRJ1))
-            {
-                sensH = 1;
-                lancerImpact("Cyan");
-                //Balle[0] = RJ1[0] + RJ1[2];
-            }
-            if (rectBalle.IntersectsWith(rectRJ2))
-            {
-                sensH = -1;
-                lancerImpact("Rose");
-                //Balle[0] = RJ2[0] - RJ2[2];
-            }
-
-            if (impactCaseCyan >= 0)
-            {
-                impactCaseCyan++;
-                if (impactCaseCyan >= imgImpactCyan.Width / imgImpactCyan.Height)
-                {
-                    impactCaseCyan = -1;
-                }
-            }
-            if (impactCaseRose >= 0)
-            {
-                impactCaseRose++;
-                if (impactCaseRose >= imgImpactRose.Width / imgImpactRose.Height)
-                {
-                    impactCaseRose = -1;
-                }
-            }
-
-
-            if (ecran == Ecran.JeuSolo)
-            {
-                if (toucheZ && RJ1[1] > 0) RJ1[1] -= Convert.ToInt32(VR);
-                if (toucheS && RJ1[1] + RJ1[3] < this.ClientSize.Height) RJ1[1] += Convert.ToInt32(VR);
-                if (RJ2[1] > Balle[1] && RJ2[1] != Balle[1] && RJ2[1] > 0) RJ2[1] -= Convert.ToInt32(VR);
-                if (RJ2[1] < Balle[1] && RJ2[1] != Balle[1] && RJ2[1] + RJ2[3] < this.ClientSize.Height) RJ2[1] += Convert.ToInt32(VR);
-                Console.WriteLine("PADX : " + RJ2[0] + "PADY : " + RJ2[1]);
-                Console.WriteLine("BALLEX : " + Balle[0] + "BALLEY : " + Balle[1]);
-
-            }
-            else
-            {
-                if (toucheZ && RJ1[1] > 0) RJ1[1] -= Convert.ToInt32(VR);
-                if (toucheS && RJ1[1] + RJ1[3] < this.ClientSize.Height) RJ1[1] += Convert.ToInt32(VR);
-                if (toucheHaut && RJ2[1] > 0) RJ2[1] -= Convert.ToInt32(VR);
-                if (toucheBas && RJ2[1] + RJ2[3] < this.ClientSize.Height) RJ2[1] += Convert.ToInt32(VR);
-            }
-
-            if (toucheEsc) ecran = Ecran.Menu;
+            MettreAJourImpacts();
 
             if (ecran == Ecran.JeuServeur)
             {
@@ -108,7 +43,8 @@ namespace pong
                     { "BALLEY", Balle[1].ToString()},
                     {"SJ1", SJ1.ToString()},
                     {"SJ2", SJ2.ToString()},
-                    {"name", pseudo.ToString()}
+                    {"name", pseudo.ToString()},
+                    { "MSG", messagePause },
 
                 });
             }
@@ -122,8 +58,84 @@ namespace pong
                 });
             }
 
-
             Invalidate();
+        }
+        private void MettreAJourBalle()
+        {
+            if (clientStatus)
+            {
+                VBalle += 0.008;
+                VR += 0.002;
+                Balle[0] += Convert.ToInt32(VBalle) * sensH;
+                Balle[1] += Convert.ToInt32(VBalle) * sensV;
+            }
+
+            if (Balle[1] <= 0) sensV = 1;
+            if (Balle[1] + Balle[3] >= ClientSize.Height) sensV = -1;
+
+            if (Balle[0] <= 0) { MarquerPoint(2); return; }
+            if (Balle[0] >= ClientSize.Width) { MarquerPoint(1); return; }
+
+            Rectangle rectBalle = new Rectangle(Balle[0] + 20, Balle[1] + 20, Balle[2] - 40, Balle[3] - 40);
+            Rectangle rectRJ1 = new Rectangle(RJ1[0] + 38, RJ1[1] + 25, RJ1[2] - 76, RJ1[3] - 50);
+            Rectangle rectRJ2 = new Rectangle(RJ2[0] + 38, RJ2[1] + 25, RJ2[2] - 76, RJ2[3] - 50);
+
+            if (rectBalle.IntersectsWith(rectRJ1)) { sensH = 1; lancerImpact("Cyan"); }
+            if (rectBalle.IntersectsWith(rectRJ2)) { sensH = -1; lancerImpact("Rose"); }
+        }
+
+        private void MarquerPoint(int joueur)
+        {
+            if (joueur == 1) SJ1++; else SJ2++;
+            resetGame(joueur == 1 ? 1 : -1);
+
+            if (SJ1 >= scoreMax || SJ2 >= scoreMax)
+            {
+                finDePartie = true;
+                messagePause = "Le joueur " + joueur + " a gagné !";
+                relanceTimer.Interval = 3000;
+            }
+            else
+            {
+                messagePause = "Point pour le joueur " + joueur + " !";
+                relanceTimer.Interval = 1500;
+            }
+
+            estEnPause = true;
+            relanceTimer.Start();
+        }
+
+        private void DeplacerRaquettes()
+        {
+            if (toucheZ && RJ1[1] > 0) RJ1[1] -= Convert.ToInt32(VR);
+            if (toucheS && RJ1[1] + RJ1[3] < ClientSize.Height) RJ1[1] += Convert.ToInt32(VR);
+
+            if (ecran == Ecran.JeuSolo)
+            {
+                int centreRaquette = RJ2[1] + RJ2[3] / 2;
+                int centreBalle = Balle[1] + Balle[3] / 2;
+                if (centreBalle < centreRaquette - 10 && RJ2[1] > 0) RJ2[1] -= Convert.ToInt32(VR);
+                else if (centreBalle > centreRaquette + 10 && RJ2[1] + RJ2[3] < ClientSize.Height) RJ2[1] += Convert.ToInt32(VR);
+            }
+            else
+            {
+                if (toucheHaut && RJ2[1] > 0) RJ2[1] -= Convert.ToInt32(VR);
+                if (toucheBas && RJ2[1] + RJ2[3] < ClientSize.Height) RJ2[1] += Convert.ToInt32(VR);
+            }
+        }
+
+        private void MettreAJourImpacts()
+        {
+            if (impactCaseCyan >= 0)
+            {
+                impactCaseCyan++;
+                if (impactCaseCyan >= imgImpactCyan.Width / imgImpactCyan.Height) impactCaseCyan = -1;
+            }
+            if (impactCaseRose >= 0)
+            {
+                impactCaseRose++;
+                if (impactCaseRose >= imgImpactRose.Width / imgImpactRose.Height) impactCaseRose = -1;
+            }
         }
         private void LireMessage()
         {
@@ -131,7 +143,7 @@ namespace pong
 
             if (udp.Available == 0)
             {
-                clientStatus = false;
+                clientStatus = (DateTime.Now - derniereReception).TotalMilliseconds < 500;
             }
 
             this.Text = "Message reçu";
@@ -139,6 +151,7 @@ namespace pong
             while (udp.Available > 0)
             {
                 clientStatus = true;
+                derniereReception = DateTime.Now;
                 IPEndPoint source = new IPEndPoint(IPAddress.Any, 0);
                 byte[] recu = udp.Receive(ref source);
                 string json = Encoding.UTF8.GetString(recu);
@@ -154,7 +167,13 @@ namespace pong
                 if (message.ContainsKey("BALLEY")) Balle[1] = Convert.ToInt32(message["BALLEY"]);
                 if (message.ContainsKey("SJ1")) SJ1 = Convert.ToInt32(message["SJ1"]);
                 if (message.ContainsKey("SJ2")) SJ2 = Convert.ToInt32(message["SJ2"]);
-                if (message.ContainsKey("name")) pseudo2 = Convert.ToString(message["name"]);
+                if (message.ContainsKey("name")) pseudo2 = message["name"];
+
+                if (message.ContainsKey("MSG"))
+                {
+                    messagePause = message["MSG"];
+                    estEnPause = messagePause != "";
+                }
                 //Console.WriteLine(source);
             }
         }
@@ -207,27 +226,61 @@ namespace pong
             }
             g.DrawImage(Image.FromFile(dossierImages + @"chiffres\chiffre_cyan_" + SJ1 + ".png"), 555, 50, 60, 100);
             g.DrawImage(Image.FromFile(dossierImages + @"chiffres\chiffre_rose_" + SJ2 + ".png"), 645, 50, 60, 100);
-            if (SJ1 > 4)
+
+            /*
+            if (ecran == Ecran.Jeu || ecran == Ecran.JeuSolo)
             {
-                rectPlayBouton = new Rectangle((ClientSize.Width - 270) / 2, (ClientSize.Height - 80) / 2, 270, 80);
-                g.DrawString("Le joueur 1 a gagner !", customPolice, Brushes.White, rectPlayBouton, centre);
+                if (SJ1 > 4)
+                {
+                    rectPlayBouton = new Rectangle((ClientSize.Width - 270) / 2, (ClientSize.Height - 80) / 2, 270, 80);
+                    g.DrawString("Le joueur 1 a gagner !", customPolice, Brushes.White, rectPlayBouton, centre);
+                    estEnPause = true;
+                    relanceTimer.Start();
+                    Invalidate();
 
-                Invalidate();
-                Thread.Sleep(5000);
+                    SJ1 = 0;
+                    resetGame(SJ1);
+                }
+                else if (SJ2 > 4)
+                {
+                    rectPlayBouton = new Rectangle((ClientSize.Width - 270) / 2, (ClientSize.Height - 80) / 2, 270, 80);
+                    g.DrawString("Le joueur 2 a gagner !", customPolice, Brushes.White, rectPlayBouton, centre);
+                    estEnPause = true;
+                    relanceTimer.Start();
+                    Invalidate();
 
-                SJ1 = 0;
-                resetGame(SJ1);
+                    SJ2 = 0;
+                    resetGame(SJ2);
+                }
             }
-            else if (SJ2 > 4)
+            else if (ecran == Ecran.JeuServeur || ecran == Ecran.JeuClient)
             {
-                rectPlayBouton = new Rectangle((ClientSize.Width - 270) / 2, (ClientSize.Height - 80) / 2, 270, 80);
-                g.DrawString("Le joueur 2 a gagner !", customPolice, Brushes.White, rectPlayBouton, centre);
+                if (SJ1 > 4)
+                {
+                    rectPlayBouton = new Rectangle((ClientSize.Width - 270) / 2, (ClientSize.Height - 80) / 2, 270, 80);
+                    g.DrawString("Le joueur 1 a gagner !", customPolice, Brushes.White, rectPlayBouton, centre);
 
-                Invalidate();
-                Thread.Sleep(5000);
+                    Invalidate();
 
-                SJ2 = 0;
-                resetGame(SJ2);
+                    SJ1 = 0;
+                    resetGame(SJ1);
+                }
+                else if (SJ2 > 4)
+                {
+                    rectPlayBouton = new Rectangle((ClientSize.Width - 270) / 2, (ClientSize.Height - 80) / 2, 270, 80);
+                    g.DrawString("Le joueur 2 a gagner !", customPolice, Brushes.White, rectPlayBouton, centre);
+
+                    Invalidate();
+
+                    SJ2 = 0;
+                    resetGame(SJ2);
+                }
+            }
+            */
+            if (estEnPause && messagePause != "")
+            {
+                Rectangle rectMessage = new Rectangle(0, (ClientSize.Height - 80) / 2, ClientSize.Width, 80);
+                g.DrawString(messagePause, customPolice, Brushes.White, rectMessage, centre);
             }
 
         }
@@ -245,8 +298,8 @@ namespace pong
 
         private void resetGame(int sens)
         {
-            Balle[0] = 290;
-            Balle[1] = 290;
+            Balle[0] = (ClientSize.Width - Balle[2]) / 2;
+            Balle[1] = (ClientSize.Height - Balle[3]) / 2;
             VBalle = vitesseDepart;
             VR = 12;
             RJ1[1] = 250;
