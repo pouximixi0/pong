@@ -117,7 +117,8 @@ namespace pong
                 LireMessage();
                 EnvoyerMessage(new Dictionary<string, string>
                 {
-                    { "RJ2Y", RJ2[1].ToString() }
+                    { "RJ2Y", RJ2[1].ToString() },
+                    {"name", pseudo.ToString()}
                 });
             }
 
@@ -178,11 +179,16 @@ namespace pong
                 Rectangle destination = new Rectangle(impactX - taille / 2, impactY - taille / 2, taille, taille);
                 g.DrawImage(imgImpactRose, destination, source, GraphicsUnit.Pixel);
             }
-            if (ecran == Ecran.JeuServeur || ecran == Ecran.JeuClient)
+            if (ecran == Ecran.JeuServeur)
             {
                 g.DrawString(pseudo, customPolice, Brushes.White, 320 - widthTxt(pseudo, g), 30);
                 g.DrawString(pseudo2, customPolice, Brushes.White, 960 - widthTxt(pseudo2, g), 30);
                 Console.WriteLine(pseudo2);
+            }
+            else if (ecran == Ecran.JeuClient)
+            {
+                g.DrawString(pseudo2, customPolice, Brushes.White, 320 - widthTxt(pseudo, g), 30);
+                g.DrawString(pseudo, customPolice, Brushes.White, 960 - widthTxt(pseudo2, g), 30);
             }
             if (afficherDebug)
             {
