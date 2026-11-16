@@ -4,10 +4,11 @@ namespace pong
 {
     public partial class Form1
     {
-        private Rectangle rectPlayBouton, rectSettingBouton, rectLogo, rectQuitButton;
+        private Rectangle rectPlayBouton, rectSkinButton, rectSettingBouton, rectLogo, rectQuitButton;
         private bool rectPlayBoutonStatus = false;
         private bool rectSettingBoutonStatus = false;
         private bool rectQuitBoutonStatus = false;
+        private bool rectSkinButtonStatus = false;
         private Font customPolice;
         private StringFormat centre;
 
@@ -17,10 +18,14 @@ namespace pong
             int hauteur = 80;
             rectLogo = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2 - 140, largeur, hauteur);
             rectPlayBouton = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2, largeur, hauteur);
-            rectSettingBouton = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2 + 70, largeur, hauteur);
-            rectQuitButton = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2 + 140, largeur, hauteur);
+            rectSkinButton = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2 + 70, largeur, hauteur);
+            rectSettingBouton = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2 + 140, largeur, hauteur);
+            rectQuitButton = new Rectangle((ClientSize.Width - largeur) / 2, (ClientSize.Height - hauteur) / 2 + 210, largeur, hauteur);
+
             g.DrawImage(imgLogo, rectLogo);
+
             g.DrawImage(rectPlayBoutonStatus ? imgMenuPlayUpRect : imgMenuPlayRect, rectPlayBouton);
+            g.DrawImage(rectSkinButtonStatus ? imgMenuPlayUpRect : imgMenuPlayRect, rectSkinButton);
             g.DrawImage(rectSettingBoutonStatus ? imgMenuPlayUpRect : imgMenuPlayRect, rectSettingBouton);
             g.DrawImage(rectQuitBoutonStatus ? imgMenuPlayUpRect : imgMenuPlayRect, rectQuitButton);
 
@@ -34,7 +39,7 @@ namespace pong
             centre.Alignment = StringAlignment.Center;
             centre.LineAlignment = StringAlignment.Center;
             g.DrawString("JOUER", customPolice, Brushes.White, rectPlayBouton, centre);
-            //g.DrawString("SKIN", police, Brushes.White, rectPlayBouton, centre);
+            g.DrawString("SKIN", police, Brushes.White, rectSkinButton, centre);
             g.DrawString("PARAMETRES", customPolice, Brushes.White, rectSettingBouton, centre);
             g.DrawString("QUITTER", customPolice, Brushes.White, rectQuitButton, centre);
         }
@@ -54,6 +59,11 @@ namespace pong
                 ecran = Ecran.Parametres;
                 Invalidate();
             }
+            else if (rectSkinButton.Contains(souris))
+            {
+                ecran = Ecran.Skin;
+                Invalidate();
+            }
             else if (rectQuitButton.Contains(souris))
             {
                 this.Close();
@@ -65,10 +75,12 @@ namespace pong
             bool survolPlay = rectPlayBouton.Contains(souris);
             bool survolSetting = rectSettingBouton.Contains(souris);
             bool survolQuitter = rectQuitButton.Contains(souris);
+            bool survolSkin = rectSkinButton.Contains(souris);
 
-            if (survolPlay != rectPlayBoutonStatus || survolSetting != rectSettingBoutonStatus || survolQuitter != rectQuitBoutonStatus)
+            if (survolPlay != rectPlayBoutonStatus || survolSetting != rectSettingBoutonStatus || survolQuitter != rectQuitBoutonStatus || survolSkin != rectSkinButtonStatus)
             {
                 rectPlayBoutonStatus = survolPlay;
+                rectSkinButtonStatus = survolSkin;
                 rectSettingBoutonStatus = survolSetting;
                 rectQuitBoutonStatus = survolQuitter;
                 Invalidate();

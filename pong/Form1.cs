@@ -22,7 +22,7 @@ namespace pong
         int impactCaseCyan = -1;
         int impactCaseRose = -1;
 
-        enum Ecran { Menu, Parametres, Jeu, JeuSolo, JeuServeur, JeuClient, GameMode, FinJeux }
+        enum Ecran { Menu, Parametres, Jeu, Skin, JeuSolo, JeuServeur, JeuClient, GameMode, FinJeux }
         Ecran ecran = Ecran.Menu;
 
         int impactX, impactY;

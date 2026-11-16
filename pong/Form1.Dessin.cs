@@ -18,6 +18,9 @@ namespace pong
                 case Ecran.Menu:
                     DessinerMenu(g);
                     break;
+                case Ecran.Skin:
+                    DessinerSkin(g);
+                    break;
                 case Ecran.Jeu:
                 case Ecran.JeuServeur:
                 case Ecran.JeuClient:

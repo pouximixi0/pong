@@ -17,5 +17,12 @@ namespace pong
         private Image imgLogo = Image.FromFile(dossierImages + @"logo\logo_pong.png");
         private Image imgPlus = Image.FromFile(dossierImages + @"icones\icone_fleche_droite.png");
         private Image imgMoin = Image.FromFile(dossierImages + @"icones\icone_fleche_gauche.png");
+
+        private Image skinImg1 = Image.FromFile(dossierImages + @"raquettes\raquette_capsule_cyan.png");
+        private Image skinImg2 = Image.FromFile(dossierImages + @"raquettes\raquette_capsule_rose.png");
+        private Image skinImg3 = Image.FromFile(dossierImages + @"raquettes\raquette_capsule_ambre.png");
+        private Image skinImg4 = Image.FromFile(dossierImages + @"raquettes\raquette_capsule_violet.png");
+
+
     }
 }
