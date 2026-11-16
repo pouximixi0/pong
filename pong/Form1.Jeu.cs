@@ -280,7 +280,7 @@ namespace pong
             if (estEnPause && messagePause != "")
             {
                 Rectangle rectMessage = new Rectangle(0, (ClientSize.Height - 80) / 2, ClientSize.Width, 80);
-                g.DrawString(messagePause, customPolice, Brushes.White, rectMessage, centre);
+                g.DrawString(messagePause, customPolice, Brushes.BlueViolet, rectMessage, centre);
             }
 
         }
